@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public Canvas canvas;
-    public GameObject nameObject;
+    public GameObject PlaneObject;
     private PlayerJoin[] playerJoins;
+    public TextMeshProUGUI m_RoomCodeText;
+    public string m_RoomCode;
+    public TextMeshProUGUI playerNameText;
 
     // Madder functions that you may call
     // These functions should be conditionally called based on if this is inside a WebGL build, not the editor
@@ -118,8 +122,8 @@ public class GameManager : MonoBehaviour
     */
     public void RoomCode(string roomCode) 
     {
-        // TODO: Any of the following code may be modified or deleted
-        Debug.Log("Room Code: " + roomCode);
+        m_RoomCode = roomCode;
+        m_RoomCodeText.text = roomCode;
     }
 
     /*
@@ -146,8 +150,10 @@ public class GameManager : MonoBehaviour
             playerJoin.stats.gamesPlayed = new Stat("Games Played", 0);
         }
 
+        playerNameText.text = playerJoin.name;
+
         // Create player name on canvas
-        GameObject name = Instantiate(nameObject, canvas.transform);
+        GameObject name = Instantiate(PlaneObject, canvas.transform);
         name.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         name.GetComponent<NameScript>().SetName(playerJoin.name);
         
