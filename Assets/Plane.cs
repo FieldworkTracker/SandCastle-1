@@ -16,9 +16,26 @@ public class Plane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
+        //Arrow keys to control movement of plane
+        if (Input.GetKey(KeyCode.UpArrow))
         {
-            r.velocity = Vector2.up * speed;
+            r.velocity = new Vector2(0, speed);
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            r.velocity = new Vector2(0, -speed);
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            r.velocity = new Vector2(-speed, 0);
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            r.velocity = new Vector2(speed, 0);
+        }
+        else
+        {
+            r.velocity = new Vector2(0, 0);
         }
     }
 }
